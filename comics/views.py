@@ -53,10 +53,9 @@ def random(request):
 def deploy(request):
 	response = ""
 	p = os.popen('cd /home/chris/public_html/cake-and-midgets; git pull origin master; python manage.py migrate')
-	for line in iter(p.readline,''):
-		response = response + line
 	p.close()
-	return HttpResponse(response)
+	
+	return HttpResponse('Deployed successfully')
 
 def render_response(req, *args, **kwargs):
     kwargs['context_instance'] = RequestContext(req)
