@@ -1,0 +1,20 @@
+{% extends 'home.html' %}
+
+{% load comments %}
+
+
+{% block comments %}
+	{% if latest %}
+		<div id="comment">
+		{% render_comment_form for latest %}
+		{% get_comment_list for latest as comment_list %}
+		{% for comment in comment_list %}
+			<div class="comment">
+			<p class="comment-info">Posted by {{comment.user_name}} on {{comment.submit_date|date:"dS b Y"|title}}</p>
+			<p>{{comment.comment}}</p>
+			</div>
+		{% endfor %}
+		</div>
+	{% endif %}
+{% endblock %}
+

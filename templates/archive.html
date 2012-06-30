@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+
+{% block main %}
+
+	{% for comic in archive %}
+	{% ifchanged %}<h3>{{comic.posted_on|date:"M Y"}}</h3>{% endifchanged %}
+	<h5>{{comic.title}}</h5>
+	<a href="/comic/{{comic.slug}}"><img src="{{MEDIA_URL}}{{comic.thumbnail}}"></a>
+	{% endfor %}
+
+{% endblock %}

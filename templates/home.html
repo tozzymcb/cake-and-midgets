@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% load comments %}
+
+{% block main %}
+	{% if latest %}
+		<div id="comic">
+			<img id="comic_img" src="{{MEDIA_URL}}{{latest.image}}" />
+			{% if previous %}
+			<div id="prev">
+				<a href="/comic/{{previous.slug}}"><img class="thumb_text" src="{{MEDIA_URL}}prevtext.jpg" /></a>
+				<a href="/comic/{{previous.slug}}"><img class="thumb_img" src="{{MEDIA_URL}}{{previous.thumbnail}}" /></a>
+			</div>
+			{% endif %}
+			{% if next %}
+			<div id="next">
+				<a href="/comic/{{next.slug}}"><img class="thumb_img" src="{{MEDIA_URL}}{{next.thumbnail}}" /></a>
+				<a href="/comic/{{next.slug}}"><img class="thumb_text" src="{{MEDIA_URL}}nexttext.jpg" /></a>
+			</div>
+			{% endif %}
+		</div>
+		<p id="info">
+			<a href="/comic/{{latest.slug}}">{{latest.title}}<a>
+			| {{latest.posted_on|date:"dS b Y"|title}} |
+			<a href="/comic/{{latest.slug}}" id="leave_a_comment">Leave a Comment</a>
+		</p>
+		{% block comments %}{% endblock %}
+		<div id="addthisbitch">
+			<!-- AddThis Button BEGIN -->
+			<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+			<a class="addthis_button_preferred_1"></a>
+			<a class="addthis_button_preferred_2"></a>
+			<a class="addthis_button_preferred_3"></a>
+			<a class="addthis_button_preferred_4"></a>
+			<a class="addthis_button_compact"></a>
+			</div>
+			<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+			<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4ee7e46249e602cd"></script>
+			<!-- AddThis Button END -->
+		</div>
+		<div id="social">
+			<img src="{{MEDIA_URL}}sharestalk.png">
+		</div>
+		<ul id="social_links">
+		<li><a href="http://www.facebook.com/pages/Cake-and-Midgets/267663536587449"><img src="{{MEDIA_URL}}facebook.jpg" /></a></li>
+		<li><a href="mailto:cakeandmidgets@gmail.com"><img src="{{MEDIA_URL}}email.jpg" /></a></li>
+		<li><a href="http://www.twitter.com/cakeandmidgets"><img src="{{MEDIA_URL}}twitter.jpg" /></a></li>
+		</ul>
+	{% endif %}
+{% endblock %}
+

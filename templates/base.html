@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title>Cake and Midgets!</title>
+
+		<meta name="keywords" content="Cake and Midgets, funny drawings, funny cartoons"/>
+		<meta name="description" content="Welcome to Cake and Midgets. Wipe your feet before you come in."/>
+		<link rel="stylesheet" href="{{MEDIA_URL}}/css/mystyle.css">
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>		
+		<script type="text/javascript" src="{{MEDIA_URL}}/js/cake.js"></script>
+	</head>
+
+	<body>
+	<div id="container">
+		<img id="logo" src="{{MEDIA_URL}}/cakeandmidgetslogo.png" />
+		<div id="main">
+			<ul id="nav">
+				<li><a id="home" href="/"></a></li>
+				<li><a id="about" href="/about/"></a></li>
+				<li><a id="more" href="/more"></a></li>
+				<li><a id="contact" href="/contact/"></a></li>
+			</ul>
+			{% block main %}
+			{% endblock %}
+
+		</div>
+		<div id="copyright">
+			&copy; Copyright Cake and Midgets {% now "Y" %}
+		</div>
+	</div>
+	</body>
+
+</html>
