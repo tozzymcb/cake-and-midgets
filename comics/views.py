@@ -2,6 +2,8 @@ from django.shortcuts import get_object_or_404, render_to_response
 from django.http import HttpResponse
 from django.template import RequestContext
 from comics.models import Comic
+
+import os
 # Create your views here.
 
 def home(request):
@@ -48,6 +50,16 @@ def random(request):
 	next_comic = _get_next(random_comic)
 	return render_response(request, 'home.html', {'latest':random_comic, 'previous':prev_comic, 'next':next_comic})
 
+def deploy(request):
+	response = ""
+	p = os.popen('cd /home/chris/public_html/cake-and-midgets; git pull origin master; python manage.py migrate')
+	for line in iter(p.readline,''):
+		response = response + line
+	p.close()
+	return HttpResponse(response)
+
 def render_response(req, *args, **kwargs):
     kwargs['context_instance'] = RequestContext(req)
     return render_to_response(*args, **kwargs)
+
+

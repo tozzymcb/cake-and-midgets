@@ -16,6 +16,8 @@ local.properties
 .settings/
 .loadpath
 
+*local_settings.py
+
 # External tool builders
 .externalToolBuilders/
 
