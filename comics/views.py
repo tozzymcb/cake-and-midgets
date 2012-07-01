@@ -65,8 +65,7 @@ def deploy(request):
 	
 	if webhook['ref'] == 'refs/heads/master':
 		response = ""
-		p = os.popen('cd /home/chris/public_html/cake-and-midgets; git pull origin master; python manage.py migrate')
-		p.close()
+		p = os.system('cd /home/chris/public_html/cake-and-midgets; git pull origin master; python manage.py migrate')
 		return HttpResponse('Deployed successfully')
 	else:
 		return HttpResponse('Error', status=500)
