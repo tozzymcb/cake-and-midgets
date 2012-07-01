@@ -3,7 +3,12 @@ from django.http import HttpResponse
 from django.template import RequestContext
 from comics.models import Comic
 
+from django.views.decorators.csrf import csrf_exempt
+
+
 import os
+import simplejson
+
 # Create your views here.
 
 def home(request):
@@ -50,12 +55,21 @@ def random(request):
 	next_comic = _get_next(random_comic)
 	return render_response(request, 'home.html', {'latest':random_comic, 'previous':prev_comic, 'next':next_comic})
 
+@csrf_exempt
 def deploy(request):
-	response = ""
-	p = os.popen('cd /home/chris/public_html/cake-and-midgets; git pull origin master; python manage.py migrate')
-	p.close()
+	f = open('/tmp/post', 'w')
+	json = request.POST['payload']
+	webhook = simplejson.loads(json)
+	f.write(webhook['ref'])
+	f.close()
 	
-	return HttpResponse('Deployed successfully')
+	if webhook['ref'] == 'refs/heads/master':
+		response = ""
+		p = os.popen('cd /home/chris/public_html/cake-and-midgets; git pull origin master; python manage.py migrate')
+		p.close()
+		return HttpResponse('Deployed successfully')
+	else:
+		return HttpResponse('Error', status=500)
 
 def render_response(req, *args, **kwargs):
     kwargs['context_instance'] = RequestContext(req)
