@@ -11,6 +11,7 @@ urlpatterns = patterns('',
     url(r'^$', 'comics.views.home'), 
     url(r'^random$', 'comics.views.random'), 
     url(r'^more$', 'comics.views.archive'), 
+    url(r'^deploy$', 'comics.views.deploy'), 
     url(r'^comic/(?P<comic_name>\w+)/$', 'comics.views.comic'),
 
     (r'^comments/', include('django.contrib.comments.urls')),
