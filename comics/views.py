@@ -55,6 +55,7 @@ def random(request):
 	next_comic = _get_next(random_comic)
 	return render_response(request, 'home.html', {'latest':random_comic, 'previous':prev_comic, 'next':next_comic})
 
+# This gets used by GitHub's webhooks to deploy the project to live.
 @csrf_exempt
 def deploy(request):
 	f = open('/tmp/post', 'w')
